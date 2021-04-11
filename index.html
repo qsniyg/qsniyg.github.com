@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+      <title>qsniyg</title>
+  </head>
+  <body>
+      <p>Personal contact info:</p>
+
+      <ul>
+          <li>Email: <span id="replaceme">(if you're seeing this, javascript is not enabled. I use protonmail.com, and my @ is my username - same as github and matrix below)</span> (<a href="pubkey.asc" target="_blank">pgp key</a>)</li>
+          <li>Matrix: <code>@qsniyg:matrix.org</code></li>
+      </ul>
+
+      <p>Links:</p>
+
+      <ul>
+          <li><a href="https://qsniyg.github.io/maxurl/">Image Max URL</a></li>
+          <li><a href="https://github.com/qsniyg/maxurl">My Github</a></li>
+      </ul>
+<script>
+var replaceme_span = document.getElementById("replaceme");
+var replaced = false;
+
+var do_replace = function() {
+	if (replaced) return;
+
+	// do this at the beginning in case there's an error
+	replaced = true;
+	document.onmousemove = null;
+
+	var our_href = location.href;
+	var domain = our_href.match(/^[a-z]+:\/\/([^/]+)/);
+	var username = domain[1].match(/^([a-z]+)\./)[1];
+	var some_github_repo = "https://github.com/ValveSoftware/Proton/";
+	var neutron = some_github_repo.replace(/.*\/([a-zA-Z]+)\/*$/, "$1").toLowerCase();
+	var company = some_github_repo.replace(/^[a-z]+:\/\/[^/]+(\.[^/.]+)\/.*/, "$1");
+	var some_character = replaceme_span.innerText.match(/my (.) is my/)[1];
+
+	replaceme_span.innerText = username + some_character + neutron + "mail" + company;
+};
+
+// the reason for this event handler is because spambots are (probably) much less likely to run this event
+document.onmousemove = function() {do_replace();}
+</script>
+  </body>
+</html>
